@@ -1,0 +1,33 @@
+.imgPersonajes {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-top: 1rem;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.colorBoton {
+    color: white;
+    background-color: #519fde;
+    margin-top: 1rem;
+}
+
+.colorBoton:hover {
+    background-color: rgb(3, 59, 99);
+    color: white;
+}
+
+.formBoton {
+    color: white;
+    background-color: #519fde;
+}
+
+.formBoton:hover {
+    background-color: rgb(3, 59, 99);
+    color: white;
+}
