@@ -113,6 +113,11 @@ class Usuario {
     }
 }
 const arrayUsuarios = [];
+///LocalStorage:
+if (localStorage.getItem("arrayUsuarios")) {
+    arrayUsuarios = JSON.parse(localStorage.getItem("arrayUsuarios"));
+}
+
 const formulario = document.getElementById("formulario");
 
 formulario.addEventListener("submit", (e) => {
@@ -127,7 +132,14 @@ formulario.addEventListener("submit", (e) => {
     console.log(arrayUsuarios);
     //reset de form
     formulario.reset();
+    localStorage.setItem("arrayUsuario", JSON.stringify(arrayUsuarios));
 });
+
+
+
+
+
+
 ///// codigo adicional: 
 
 const contenedor = document.getElementById("contenedorUsuarios");
