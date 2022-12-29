@@ -42,7 +42,7 @@ let seleccionPersonaje = [];
 // Modifico el DOM para mostrar los personajes en una grilla
 const contenedorPersonajes = document.getElementById("contenedorPersonajes");
 
-// Mostrar personajes (función) , creación de las tarjetas y selección de personaje.
+// Mostrar personajes (función), creación de las tarjetas y selección de personaje.
 const mostrarPersonajes = () => {
     Personajes.forEach(Personaje => {
         const card = document.createElement("div");
@@ -106,9 +106,10 @@ const mostrarEleccion = () => {
 //guardar datos de cuenta
 //creo la clase usuario por las dudas, por si quiero agregar otros datos como nombre real, pais, edad, etc.
 class Usuario {
-    constructor(nombreUsuario, email) {
+    constructor(nombreUsuario, email, pseleccionado) { //pseleccionado guarda el ID del personaje que se seleccionó
         this.nombreUsuario = nombreUsuario;
         this.email = email;
+        this.pseleccionado = pseleccionado;
     }
 }
 const arrayUsuarios = [];
@@ -118,15 +119,55 @@ formulario.addEventListener("submit", (e) => {
     e.preventDefault();
     const nombreUsuario = document.getElementById("nombreUsuario");
     const email = document.getElementById("email");
-
+    const pseleccionado = seleccionPersonaje[0];
     //creo el objeto usuario
-    const usuario = new Usuario(nombreUsuario.value, email.value);
+    const usuario = new Usuario(nombreUsuario.value, email.value, pseleccionado.id);
     arrayUsuarios.push(usuario);
+    console.log("usuarios:");
     console.log(arrayUsuarios);
-
-
     //reset de form
     formulario.reset();
+});
+///// codigo adicional: 
+
+const contenedor = document.getElementById("contenedorUsuarios");
+const verUsuarios = document.getElementById("verUsuarios")
+
+verUsuarios.addEventListener("click", () => {
+    mostrarUsuarios();
 })
+
+//Función para mostrar el carrillo: 
+
+const mostrarUsuarios = () => {
+
+    if (arrayUsuarios != 0) {
+
+        contenedor.innerHTML = "";
+        arrayUsuarios.forEach(usuario => {
+            const card = document.createElement("li");
+            card.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-start");
+            card.innerHTML = `
+                <div class="ms-2 me-auto">
+                <div class="fw-bold">${usuario.nombreUsuario}</div>
+                ${usuario.email} -- Personaje:  ${Personajes[(usuario.pseleccionado - 1)].nombre}
+                </div>`;
+            contenedor.appendChild(card);
+        })
+
+    } else {
+
+        contenedor.innerHTML = "";
+        const card = document.createElement("li");
+        card.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-start");
+        card.innerHTML = `
+                    <div class="ms-2 me-auto">
+                    <div class="fw-bold">NO HAY USUARIOS</div>
+                    </div>`;
+        contenedor.appendChild(card);
+    }
+}
+
+
 
 
